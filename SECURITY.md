@@ -4,13 +4,15 @@ Report security issues privately through GitHub Security Advisories when availab
 
 Do not include secrets in issues, discussions, pull requests, screenshots, logs, or reproduction bundles.
 
-This skill should never publish or request raw:
+These skills should never publish or request raw:
 
 - App Store Connect private keys
 - Google service account JSON
 - keystores or keystore passwords
 - provisioning profiles or certificates
 - reviewer account passwords
+- OAuth client secrets
+- push device tokens
 - `.p8`, `.p12`, or other signing materials
 - private scratchpad or memory files
 

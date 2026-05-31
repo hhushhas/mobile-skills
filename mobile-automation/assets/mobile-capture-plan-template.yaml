@@ -1,0 +1,57 @@
+# Store-media capture plan for mobile-automation.
+# Keep test credentials as refs only.
+
+v: 1
+provider: maestro # maestro | fastlane | xcrun-adb | detox | appium | firebase-test-lab
+output: store/screenshots
+
+app:
+  ios_bundle: com.acme.app
+  android_package: com.acme.app
+  launch_args: []
+  demo_account: secret:op://Mobile/AppDemo
+
+locales:
+  - en-US
+
+devices:
+  ios:
+    - name: "iPhone 16 Pro Max"
+      store_class: iphone_6_9
+      orientation: portrait
+  android:
+    - name: "Pixel 9 Pro"
+      store_class: phone
+      orientation: portrait
+
+scenes:
+  - id: onboarding
+    title: "Onboarding"
+    route: "acme://onboarding"
+    flow: ".maestro/onboarding.yaml"
+    outputs:
+      ios: "ios/{locale}/iphone_6_9/01-onboarding.png"
+      android: "android/{locale}/phone/01-onboarding.png"
+  - id: home
+    title: "Home"
+    route: "acme://home"
+    flow: ".maestro/home.yaml"
+    outputs:
+      ios: "ios/{locale}/iphone_6_9/02-home.png"
+      android: "android/{locale}/phone/02-home.png"
+
+videos:
+  - id: core-flow
+    flow: ".maestro/core-flow.yaml"
+    output: "previews/{locale}/core-flow.mp4"
+    max_seconds: 30
+
+validation:
+  apple:
+    min_screenshots: 1
+    max_screenshots: 10
+    formats: [png, jpg, jpeg]
+  google:
+    min_screenshots: 2
+    max_dimension_px: 3840
+    formats: [png, jpg, jpeg]

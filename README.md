@@ -2,12 +2,12 @@
 
 [![skills.sh](https://skills.sh/b/hhushhas/mobile-skills)](https://skills.sh/hhushhas/mobile-skills)
 
-Agent Skills compatible workflows for tedious iOS and Android release work.
+Agent Skills compatible workflows for tedious iOS and Android app work.
 
 This repo currently contains:
 
 - `mobile-submission`: prepare, review, and submit iOS/Android apps to App Store Connect and Google Play.
-- `mobile-automation`: automate screenshots, demo/app-preview videos, auth/deep-link setup, push notifications, provider checks, and precise human console tasks for dashboard-only gaps.
+- `mobile-automation`: automate screenshots, demo videos, auth/deep-link setup, push notifications, provider checks, and precise human console guidance for dashboard-only gaps.
 
 ## Install
 
@@ -75,36 +75,31 @@ scratchpad/mobile-submission-memory.md
 
 ### `mobile-automation`
 
-Use this skill before submission, or standalone, to reduce repetitive mobile app setup work.
+Use this skill to reduce repetitive mobile app setup work.
 
 It covers:
 
-- screenshot capture plans and generated store media folders
-- demo videos and App Store app-preview prep
-- Maestro-first capture with fastlane/API upload paths
+- screenshot capture and organized output folders
+- demo video recording
+- Maestro-first capture with fastlane/native CLI fallbacks
 - Sign in with Apple, Google Sign-In, Firebase Auth, Universal Links, and Android App Links setup checks
-- APNs, FCM, Expo/EAS, and push credential readiness
+- APNs, FCM, Expo/EAS, and push credential setup checks
 - CLI/API execution where reliable
 - exact human console tasks for credential-custody and dashboard-only gaps
 
-Expected project artifacts:
+Optional helper artifact:
 
 ```text
-scratchpad/mobile-automation-packet.yaml
-scratchpad/mobile-automation-ledger.md
-scratchpad/mobile-automation-human-tasks.md
 scratchpad/mobile-capture-plan.yaml
-scratchpad/mobile-automation-learnings.md
-scratchpad/mobile-automation-memory.md
 ```
 
 ## Safety
 
 These skills are designed to avoid accidental account/store changes:
 
-- `dry-run` is the default.
+- `mobile-submission` uses `dry-run` by default.
 - Store submission requires explicit submit intent.
-- Provider account writes are called out before execution.
+- `mobile-automation` calls out provider account writes before execution.
 - Secrets must be referenced, not pasted.
 - Dashboard-only work defaults to guided human console tasks, not browser automation.
 
@@ -121,7 +116,6 @@ mobile-submission/
 
 mobile-automation/
   SKILL.md
-  assets/mobile-automation-packet-template.yaml
   assets/mobile-capture-plan-template.yaml
   agents/openai.yaml
   references/

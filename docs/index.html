@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mobile Skills</title>
-    <meta name="description" content="Agent Skills for iOS and Android screenshots, auth, push notifications, readiness, and store submission." />
+    <meta name="description" content="Agent Skills for iOS and Android screenshots, auth, push notifications, readiness, and app submission." />
     <meta property="og:title" content="Mobile Skills" />
-    <meta property="og:description" content="Automate mobile setup chores, then prepare and submit cleanly through App Store Connect and Google Play." />
+    <meta property="og:description" content="Automate mobile setup chores with one skill, then use a separate skill when it is time to submit." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hhushhas.github.io/mobile-skills/" />
     <meta property="og:image" content="https://hhushhas.github.io/mobile-skills/assets/mobile-submission-logo.png" />
@@ -202,10 +202,10 @@
 
         <div class="wrap">
           <span class="eyebrow"><span class="dot"></span> Agent Skills · iOS &amp; Android</span>
-          <h1>Mobile release work, <span class="em">without</span> the busywork.</h1>
+          <h1>Mobile app chores, <span class="em">handled</span> from the CLI.</h1>
           <p class="lead">
             A small skillset for your coding agent — screenshots, demo videos, auth, push notifications,
-            readiness gates, guided console tasks, and Apple &amp; Google execution. Dry-run by default.
+            guided console tasks, readiness gates, and Apple &amp; Google execution when you need it.
           </p>
           <div class="cta">
             <a class="btn p" href="https://github.com/hhushhas/mobile-skills">
@@ -221,18 +221,17 @@
           <div class="window">
             <div class="titlebar">
               <div class="dots"><i></i><i></i><i></i></div>
-              <span class="t"><b>mobile-automation</b> + <b>mobile-submission</b> — dry-run</span>
-              <span class="badge">READY · WARN</span>
+              <span class="t"><b>mobile-automation</b> — setup</span>
+              <span class="badge">PUSH · ACTION NEEDED</span>
             </div>
             <div class="term">
 <span class="l"><span class="m">$</span> <span class="c">mobile-automation</span> <span class="pl">full</span></span>
 <span class="l"><span class="m">  scanning repository…</span></span>
-<span class="l">  <span class="k">mode</span>      <span class="pl">dry-run</span>     <span class="m"># no store mutation</span></span>
 <span class="l">  <span class="k">assets</span>    <span class="g">✓ capture plan generated</span></span>
 <span class="l">  <span class="k">auth</span>      <span class="g">✓ links and native config checked</span></span>
 <span class="l">  <span class="k">push</span>      <span class="y">! APNs key upload needs console</span></span>
-<span class="l">  <span class="k">tasks</span>     <span class="y">3 credential-custody steps queued</span></span>
-<span class="l"><span class="m">  →</span> hand off to <span class="c">mobile-submission</span> when setup is <span class="g">ready</span></span>
+<span class="l">  <span class="k">console</span>   <span class="y">3 credential-custody steps</span></span>
+<span class="l"><span class="m">  →</span> validate on a real device after credentials are added</span>
             </div>
           </div>
         </div>
@@ -241,15 +240,15 @@
       <section class="blk" id="flow">
         <div class="wrap">
           <div class="label"><span class="pip"></span> The split</div>
-          <h2>Automate setup, then <span class="em">submit cleanly.</span></h2>
-          <p class="sub">Two focused skills cover the annoying prep work and the actual store-release path.</p>
+          <h2>Setup chores stay <span class="em">separate.</span></h2>
+          <p class="sub">One skill handles mobile automation chores. A separate skill handles app submission.</p>
           <div class="phases">
-            <div class="phase"><span class="num">01</span><h3>Capture</h3><p class="desc-cell">Generate screenshot plans, demo videos, and store-shaped media with Maestro, fastlane, xcrun, or adb.</p></div>
+            <div class="phase"><span class="num">01</span><h3>Capture</h3><p class="desc-cell">Generate screenshots and demo videos with Maestro, fastlane, xcrun, or adb.</p></div>
             <div class="phase"><span class="num">02</span><h3>Auth</h3><p class="desc-cell">Check Sign in with Apple, Google Sign-In, Firebase Auth, URL schemes, Universal Links, and App Links.</p></div>
             <div class="phase"><span class="num">03</span><h3>Push</h3><p class="desc-cell">Prepare APNs, FCM, Expo/EAS, entitlements, provisioning profiles, and real-device smoke-test paths.</p></div>
-            <div class="phase"><span class="num">04</span><h3>Review</h3><p class="desc-cell">Run submission readiness gates for blockers, high-risk issues, privacy, reviewer access, and unknowns.</p></div>
-            <div class="phase"><span class="num">05</span><h3>Guide</h3><p class="desc-cell">Turn dashboard-only gaps into exact console steps with fields, controls, values, and validation.</p></div>
-            <div class="phase"><span class="num">06</span><h3>Submit</h3><p class="desc-cell">Use the submission skill for TestFlight, App Review, or Play track execution when approved.</p></div>
+            <div class="phase"><span class="num">04</span><h3>Guide</h3><p class="desc-cell">Turn dashboard-only gaps into exact console steps with fields, controls, values, and validation.</p></div>
+            <div class="phase"><span class="num">05</span><h3>Verify</h3><p class="desc-cell">Check generated assets, links, entitlements, configs, and real-device push behavior.</p></div>
+            <div class="phase"><span class="num">06</span><h3>Submit</h3><p class="desc-cell">Use the separate submission skill only when you are actually preparing store review.</p></div>
           </div>
         </div>
       </section>
@@ -259,9 +258,9 @@
           <div class="label"><span class="pip"></span> Safe by default</div>
           <h2>Designed to avoid <span class="em">accidental damage.</span></h2>
           <div class="guards">
-            <div class="gcard"><div class="ic">✓</div><b>Dry-run first</b><p>No App Store Connect, Google Play, Firebase, or Apple account mutation happens by default.</p></div>
+            <div class="gcard"><div class="ic">✓</div><b>Explicit writes</b><p>Provider account changes are called out before execution.</p></div>
             <div class="gcard"><div class="ic">✓</div><b>Secret refs only</b><p>Uses op://, env:, secret:, and ref: references — nothing is ever pasted.</p></div>
-            <div class="gcard"><div class="ic">✓</div><b>Final gate</b><p>Checks setup evidence, packet, store state, listing, privacy, and reviewer access before submit.</p></div>
+            <div class="gcard"><div class="ic">✓</div><b>Verification</b><p>Checks generated assets, native config, provider readback, and device behavior when possible.</p></div>
           </div>
         </div>
       </section>

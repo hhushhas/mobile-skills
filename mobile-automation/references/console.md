@@ -21,15 +21,15 @@ Preserve dashboard control types. Do not turn checkboxes, radio buttons, dropdow
 
 ## Known Console-Only Or Credential-Custody Tasks
 
-### Apple App Store Connect API Key
+### Apple API Key
 
 - Direct URL: https://appstoreconnect.apple.com/access/integrations/api
-- Fallback: App Store Connect -> Users and Access -> Integrations -> App Store Connect API.
+- Fallback: Apple developer/account dashboard -> Users and Access -> Integrations -> API access.
 - Required role: Admin for team keys.
 - Control: button, Generate API Key.
 - Fields:
   - Name: project-specific, for example `Mobile Automation CI`.
-  - Access: least role that covers needed App Store Connect work; use Admin only when provisioning endpoints or capability/profile management require it.
+  - Access: least role that covers the needed Apple account work; use Admin only when provisioning endpoints or capability/profile management require it.
 - Secret handling:
   - Download `.p8` once.
   - Store as `op://`, CI secret, or secure local ref.
@@ -80,35 +80,24 @@ Preserve dashboard control types. Do not turn checkboxes, radio buttons, dropdow
 - Android fields:
   - Application type: Android.
   - Package name: app package.
-  - SHA-1 certificate fingerprint: debug/release/Play App Signing SHA-1 as required.
+  - SHA-1 certificate fingerprint: debug/upload/provider-managed SHA-1 as required.
 - iOS fields:
   - Application type: iOS.
   - Bundle ID: iOS bundle ID.
-  - Team ID/App Store ID: enter when the console requires it.
+  - Team ID/app identifier: enter when the console requires it.
 - Secret handling:
   - Store client secrets only in secret manager if created.
   - Mobile native client IDs are not secret, but keep exported JSON out of public chat.
 - Confirmation:
   - Client ID, application type, package/bundle, SHA/team facts.
 
-### Play App Signing Fingerprints
+### Provider Signing Fingerprints
 
 - Direct URL: https://play.google.com/console/
 - Fallback: Play Console -> app -> Setup -> App integrity -> App signing.
-- Required role: Play Console release/app integrity access.
+- Required role: account access that can view app integrity/signing details.
 - Fields:
   - Copy SHA-1 and SHA-256 for the App signing key certificate.
   - Copy upload key fingerprints if needed.
 - Confirmation:
-  - SHA-1, SHA-256, certificate type, app package, source path in Play Console.
-
-### Google Play Preview Video
-
-- Direct URL: https://play.google.com/console/
-- Fallback: Play Console -> app -> Store presence -> Main store listing -> Graphics -> Preview video.
-- Required role: listing edit access.
-- Control: text field.
-- Value:
-  - Public YouTube URL for the preview video.
-- Confirmation:
-  - YouTube URL, listing locale, and whether video is visible/processed.
+  - SHA-1, SHA-256, certificate type, app package, source path in the provider console.

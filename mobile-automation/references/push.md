@@ -44,7 +44,7 @@ Expo/EAS:
 ## Manual Or Console-Only
 
 - Apple APNs `.p8` key creation/download in Certificates, Identifiers & Profiles.
-- App Store Connect API key bootstrap; ASC API keys are not APNs keys.
+- Apple API key bootstrap; Apple account API keys are not APNs keys.
 - Firebase iOS APNs key upload; official docs describe Firebase Console upload and no documented Firebase CLI/Management API endpoint was found.
 - Physical-device push validation when no real device/token is available.
 
@@ -90,7 +90,7 @@ curl -X POST \
 - Stale iOS provisioning profiles are the most common push setup failure after enabling capabilities.
 - APNs `.p8` files are one-time-download secrets. If lost, rotate rather than trying to recover.
 - Push does not have a meaningful simulator-only final verification path; use a physical device for confidence.
-- Expo/EAS is often the smoothest Expo path, but it stores credentials with Expo.
+- Expo/EAS is often the smoothest Expo path, but it keeps credentials with Expo.
 - Never commit `.p8`, `.p12`, service account JSON, provisioning profiles, keystores, or device tokens.
 
 ## Sources

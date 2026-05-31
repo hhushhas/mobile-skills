@@ -1,166 +1,113 @@
 ---
 name: mobile-automation
-description: "Automate mobile app setup chores before release. Use for iOS/Android screenshot and demo video capture, store media prep, native auth/deep-link setup, push notification provisioning, Firebase/Apple/Google/Expo/EAS checks, CLI-first execution, validation, and precise human console tasks for dashboard-only gaps."
+description: "Automate tedious mobile app chores. Use for iOS/Android screenshot capture, demo video recording, native auth/deep-link setup, push notification setup, Firebase/Apple/Google/Expo/EAS CLI checks, validation, and precise human console guidance when a provider dashboard step cannot be automated."
 license: MIT
 ---
 
 # Mobile Automation
 
-Use this skill to remove repetitive mobile app setup work before submission: screenshots, demo/app-preview videos, authentication plumbing, deep links, push notifications, and provider credentials.
+Use this skill for mobile app setup chores that slow down development:
 
-The parent agent is the orchestrator. It owns decisions, state, packet, ledger, human guidance, secret handling, verification, and final reporting. Prefer CLI/API execution where reliable; create exact human console tasks only for credential-custody or dashboard-only gaps.
+- screenshots and demo videos
+- authentication plumbing
+- deep links, Universal Links, and Android App Links
+- push notifications
+- provider CLI/API checks for Apple, Google, Firebase, Expo/EAS, and similar services
 
-Canonical project artifacts:
+Keep the skill focused on app setup chores. Do not create packets, ledgers, memory files, status contracts, handoffs, or execution-mode state.
 
-- `scratchpad/mobile-automation-packet.yaml`
-- `scratchpad/mobile-automation-ledger.md`
-- `scratchpad/mobile-automation-human-tasks.md`
-- `scratchpad/mobile-capture-plan.yaml`
-- `scratchpad/mobile-automation-learnings.md`
-- `scratchpad/mobile-automation-memory.md`
+## References
 
-Optional reusable private memory:
+Load only the reference needed for the requested task.
 
-- a user-private memory file such as `~/.agents/private/mobile-automation-memory.md`, if the agent/runtime supports it
-
-Use `assets/mobile-automation-packet-template.yaml` for the packet shape. Prefer a project-provided `scratchpad/mobile-automation-packet-template.yaml` when it exists.
-
-## Reference Index
-
-Load only the references needed for the requested mode.
-
-| Need | Read |
+| Task | Read |
 | --- | --- |
-| Screenshot, demo video, store media capture/upload | `references/assets.md` |
+| Screenshots, screen recordings, demo videos | `references/assets.md` |
 | Native auth, OAuth, Sign in with Apple, Google Sign-In, links | `references/auth.md` |
-| Push notifications, APNs, FCM, Expo/EAS, validation | `references/push.md` |
-| Human console task format and known console-only gaps | `references/console.md` |
+| Push notifications, APNs, FCM, Expo/EAS | `references/push.md` |
+| Dashboard-only provider setup | `references/console.md` |
 
-## Mode Selection
+## Working Style
 
-- If the user asks for screenshots, app previews, demo videos, store media, or listing images, run `assets`.
-- If the user asks for login, authentication, OAuth, Sign in with Apple, Google Sign-In, deep links, Universal Links, App Links, or reviewer access, run `auth`.
-- If the user asks for push notifications, APNs, FCM, Expo push, notification credentials, or push smoke tests, run `push`.
-- If the user asks to prepare the whole mobile app setup, run `full`: assets + auth + push, then summarize readiness for the submission skill.
-- Default `controls.action` is `dry-run`: inspect, plan, validate, generate packets/tasks, and do not mutate provider accounts.
-- Local source edits are allowed when the user clearly asks to set up, configure, scaffold, or fix the app.
-- Provider account writes require an explicit request such as `configure Firebase`, `enable Apple capabilities`, `upload credentials`, or `execute`.
+Start by inspecting the app shape: framework, native folders, bundle ID, package name, build commands, provider config, and existing test/capture tooling.
 
-Packet status:
+Prefer existing project tools and config over adding new dependencies. If a new CLI/tool is needed, first check maintenance, recency, adoption, and obvious risk flags.
 
-- `ready`: requested automation is complete and verified.
-- `ready_warn`: no known blocker, but manual review or external async processing remains.
-- `blocked`: missing credential/account/device/domain access or a failing validation prevents completion.
+Prefer CLI/API automation when it is reliable. When a provider dashboard step is unavoidable, give exact human guidance: page, fallback navigation, control type, value, upload, and how to confirm it.
 
-## Memory
+Make local source/config edits when the user asks to set up, configure, scaffold, or fix the app. Keep edits scoped to the requested chore.
 
-Read memory before asking operational setup questions:
+Do not paste or save secrets. Use refs such as `op://`, `env:`, `secret:`, `ref:`, or secure local paths.
 
-1. `scratchpad/mobile-automation-memory.md`
-2. User-private memory such as `~/.agents/private/mobile-automation-memory.md`, if available
+## Task Selection
 
-Use memory for reusable, non-secret facts:
+- Screenshots or videos: use `references/assets.md`.
+- Login/auth/OAuth/deep links: use `references/auth.md`.
+- Push notifications/APNs/FCM/Expo push: use `references/push.md`.
+- A required console/key/credential step: use `references/console.md`.
+- Broad request like "set up the mobile app chores": handle assets, auth, and push in that order, loading each reference only when needed.
 
-- preferred Apple team, Google/Firebase project, Expo account, Play account, default domains
-- credential reference locations such as `op://`, `env:`, `secret:`, `ref:`, or secure local paths
-- recurring console blockers, CLI commands, simulator/device defaults, capture device sets
-- preferred screenshot locales, supported stores, push provider, auth provider, reviewer account conventions
+## Screenshots And Videos
 
-Do not store secret values, private keys, keystore passwords, service account JSON, `.p8`, `.p12`, provisioning profiles, reviewer passwords, OAuth client secrets, device tokens, or full logs in memory.
+Default to Maestro for cross-platform capture unless the repo already has a mature native test setup.
 
-Priority order: user request > packet > project memory > global private memory > ask.
+Good defaults:
 
-## Workflow
+- Maestro for Expo, React Native, Flutter, native iOS, and native Android.
+- fastlane `snapshot` when iOS XCUITest screenshot flows already exist.
+- fastlane `screengrab` when Android instrumentation screenshot flows already exist.
+- `xcrun simctl` and `adb` for simple raw captures.
+- Detox or Appium only when the project already uses them.
 
-### 1. Discovery
+If a written plan helps, create a small capture plan from `assets/mobile-capture-plan-template.yaml` or adapt the project's existing flow files. Avoid inventing a big state file.
 
-Inspect the repo and existing scratchpads. Discover:
+Verify by opening representative generated images/videos, checking filenames/output paths, and confirming that the captures show the intended app state.
 
-- framework: native iOS, native Android, React Native, Expo/EAS, Flutter, Capacitor, other
-- iOS bundle ID, Android package name, app name, Apple team ID, Google/Firebase project IDs, Expo project ID
-- build commands, release lanes, simulator/emulator compatibility, existing Maestro/Detox/Appium/XCTest/Espresso tests
-- auth providers, redirect URLs, URL schemes, Universal Links, App Links, reviewer/demo access
-- push provider, APNs/FCM/Expo/OneSignal/Braze setup, entitlements, permissions, real-device test path
-- store media folders, screenshot locales/devices, preview videos, feature graphic, listing metadata
-- credential refs, missing console setup, and domain ownership paths
+## Auth And Links
 
-Record findings in `scratchpad/mobile-automation-ledger.md`.
+Automate local app config and provider API work where supported:
 
-### 2. Plan
+- iOS entitlements, URL schemes, Associated Domains, and provisioning-profile refresh.
+- Android intent filters, App Links, custom schemes, SHA fingerprints, and `assetlinks.json`.
+- Firebase apps/config downloads and Android SHA registration.
+- Firebase/Auth provider config when required client IDs/secrets already exist as secure refs.
 
-Create or update `scratchpad/mobile-automation-packet.yaml`.
+Use console guidance for credential ownership steps such as initial Apple API keys, Sign in with Apple Services ID/private key setup, Google native OAuth client creation, and Play App Signing fingerprints.
 
-For assets, create or update `scratchpad/mobile-capture-plan.yaml` with:
+Verify with provider readback, generated association files, `adb` link checks, simulator/device link opens, and entitlement/profile inspection.
 
-- platforms, locales, device classes, orientation, scenes, deep links, test credentials refs, output folders
-- capture provider: Maestro, fastlane snapshot/screengrab, xcrun/adb, Detox, Appium, Firebase Test Lab
-- validation: dimensions, formats, count, alpha channel, video codec/duration, store folder shape
+## Push
 
-If provider account writes or credential uploads are needed, list them explicitly before execution.
+Automate the pieces that are deterministic:
 
-### 3. Execute
+- Android Firebase/FCM app setup, `google-services.json`, Gradle dependencies, and build checks.
+- iOS Push Notifications capability, entitlements, profile refresh, and `aps-environment` validation.
+- Expo/EAS credential checks when the project already uses Expo/EAS.
+- FCM send smoke test when a real device token and secure send credentials are available.
 
-Follow the mode reference:
+Use console guidance for APNs `.p8` creation/download and Firebase iOS APNs key upload when no supported CLI/API path exists.
 
-- `assets`: read `references/assets.md`
-- `auth`: read `references/auth.md`
-- `push`: read `references/push.md`
-- `full`: read each relevant reference only when its phase begins
-
-Prefer deterministic CLIs and official APIs. Use direct browser/computer-use only when the user explicitly wants that path. The default fallback is a precise human task.
-
-### 4. Human Console Tasks
-
-Create `scratchpad/mobile-automation-human-tasks.md` for dashboard-only work using `references/console.md`.
-
-Rules:
-
-- Include direct URLs only as best-effort convenience links.
-- Always include fallback navigation.
-- Preserve dashboard control shape: checkbox, radio, dropdown, text field, textarea, file upload, questionnaire, matrix/table.
-- Give the exact value to select, paste, upload, or leave unchanged.
-- Mark unknown fields as unknown and research/update the reference instead of inventing values.
-
-### 5. Verification
-
-Verify with the closest real evidence available:
-
-- local source/config diffs
-- CLI/API readback
-- generated artifacts and hashes
-- simulator/emulator screenshots or recordings
-- profile/entitlement inspection
-- Firebase/Apple/Google/Expo readback
-- physical-device push/auth smoke test when required
-
-If blocked, say exactly what is missing and where to resolve it.
+Verify push with a physical-device path whenever possible. Do not claim push works from config inspection alone.
 
 ## Guardrails
 
-- Keep secrets as refs: `op://`, `env:`, `secret:`, `ref:`, or secure local paths.
 - Never commit `.p8`, `.p12`, `.mobileprovision`, service account JSON, keystores, OAuth secrets, reviewer passwords, device tokens, or raw console exports.
 - Do not claim auth or push works without a real validation path.
-- Do not silently use Firebase Dynamic Links for new work; it is deprecated/shut down. Prefer Universal Links and Android App Links.
+- Do not use Firebase Dynamic Links for new work; it is deprecated/shut down. Prefer Universal Links and Android App Links.
 - Regenerate iOS provisioning profiles after capability changes.
 - Prefer APNs token auth keys over APNs TLS certificates unless a vendor requires certificates.
-- Treat app-preview/demo videos as human-reviewable creative assets even when capture is automated.
-- Keep project-specific decisions in the project repo/spec. Keep this skill project-agnostic.
+- Treat generated screenshots and videos as human-reviewable assets even when capture is automated.
 
 ## Final Output
 
-Lead with the result.
+Lead with what was completed.
 
 Include:
 
-- mode: assets, auth, push, or full
-- packet path/status
-- local edits made
-- provider writes performed or skipped
-- generated artifacts and output folders
-- auth result
-- push result
-- human console tasks path and completion state
+- task area: assets, auth, push, or mixed
+- local files changed
+- commands run and important results
+- generated assets or configs
+- console steps still needed, if any
 - validation evidence
-- ledger path
-- learnings added
-- next step
+- blockers or next step

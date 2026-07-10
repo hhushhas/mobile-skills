@@ -2,131 +2,51 @@
 
 [![skills.sh](https://skills.sh/b/hhushhas/mobile-skills)](https://skills.sh/hhushhas/mobile-skills)
 
-Agent Skills compatible workflows for tedious iOS and Android app work.
+Agent Skills for iOS and Android store work.
 
-Site: https://mobile-skills.msbilal.workers.dev
+This repo contains one skill:
 
-This repo currently contains:
+- `mobile-submission`: take an iOS/Android app from repo to the stores — readiness review against Apple and Google policy, version bumps, builds, App Store Connect and Google Play upload and submission, and rejection recovery.
 
-- `mobile-submission`: prepare, review, and submit iOS/Android apps to App Store Connect and Google Play.
-- `mobile-automation`: automate screenshots, demo videos, auth/deep-link setup, push notifications, provider checks, and precise human console guidance for dashboard-only gaps.
+It works CLI-first through [`asc`](https://github.com/rorkai/App-Store-Connect-CLI) (App Store Connect) and [`gplay`](https://github.com/tamtom/play-console-cli) (Google Play), uses browser automation for web-only console forms, and hands the human only the steps an account owner must personally do. The store is treated as the source of truth — no packets, ledgers, or state files.
+
+A former `mobile-automation` skill (screenshots, auth, push) was removed; a focused screenshot skill may return later. The `asc`/`gplay` companion skill packs ([app-store-connect-cli-skills](https://github.com/rorkai/app-store-connect-cli-skills), [gplay-cli-skills](https://github.com/tamtom/gplay-cli-skills)) already cover screenshot upload, metadata, and pricing work.
 
 ## Install
 
 ### Codex / Agent Skills compatible agents
 
-Install the submission skill:
-
 ```bash
 gh skill install hhushhas/mobile-skills mobile-submission
 ```
 
-Install the automation skill:
-
-```bash
-gh skill install hhushhas/mobile-skills mobile-automation
-```
-
-Install from this repository once it is indexed by your skill manager:
+Or once indexed by your skill manager:
 
 ```bash
 npx skills add hhushhas/mobile-skills
 ```
 
-You can also copy either skill folder into your agent's skills directory and invoke:
-
-```text
-$mobile-submission
-$mobile-automation
-```
+You can also copy the skill folder into your agent's skills directory and invoke `$mobile-submission`.
 
 ### ChatGPT / OpenAI Skills
 
-OpenAI skills can be uploaded from the Skills UI. Build the ZIPs and upload the one you want from ChatGPT's Skills page or your workspace skill editor:
-
-```bash
-./scripts/package.sh
-# → dist/mobile-submission.zip, dist/mobile-automation.zip
-```
+Zip the `mobile-submission/` folder and upload it from ChatGPT's Skills page or your workspace skill editor.
 
 ### Claude Skills
 
-Claude supports custom skill ZIP uploads. Build the ZIPs with `./scripts/package.sh` and upload from Claude's Skills customization page. Team/Enterprise sharing depends on your organization settings.
-
-## Skills
-
-### `mobile-submission`
-
-Use this skill to take a mobile app from project discovery to App Store Connect and Google Play submission.
-
-It covers:
-
-- mobile store readiness review
-- App Store Connect and Google Play app-record bootstrap
-- rejection-risk gates
-- submission packet generation
-- guided human console tasks for dashboard-only fields
-- Apple and Google CLI/API execution
-- dry-run, submit, and resume flows
-- optional ASO, store conversion, and paid acquisition growth pass
-
-Expected project artifacts:
-
-```text
-scratchpad/mobile-submission-packet.yaml
-scratchpad/mobile-submission-ledger.md
-scratchpad/mobile-console-human-tasks.md
-scratchpad/mobile-submission-learnings.md
-scratchpad/mobile-submission-memory.md
-```
-
-### `mobile-automation`
-
-Use this skill to reduce repetitive mobile app setup work.
-
-It covers:
-
-- screenshot capture and organized output folders
-- demo video recording
-- Maestro-first capture with fastlane/native CLI fallbacks
-- Sign in with Apple, Google Sign-In, Firebase Auth, Universal Links, and Android App Links setup checks
-- APNs, FCM, Expo/EAS, and push credential setup checks
-- CLI/API execution where reliable
-- exact human console tasks for credential-custody and dashboard-only gaps
-
-Optional helper artifact:
-
-```text
-scratchpad/mobile-capture-plan.yaml
-```
-
-## Safety
-
-These skills are designed to avoid accidental account/store changes:
-
-- `mobile-submission` uses `dry-run` by default.
-- Store submission requires explicit submit intent.
-- `mobile-automation` calls out provider account writes before execution.
-- Secrets must be referenced, not pasted.
-- Dashboard-only work defaults to guided human console tasks, not browser automation.
-
-Never commit project scratchpads, credential files, private memory, App Store Connect keys, Google service account JSON, keystores, provisioning profiles, certificates, APNs keys, OAuth secrets, reviewer passwords, or device tokens.
+Zip the `mobile-submission/` folder and upload it from Claude's Skills customization page. Team/Enterprise sharing depends on your organization settings.
 
 ## Repository Layout
 
 ```text
 mobile-submission/
   SKILL.md
-  assets/mobile-submission-packet-template.yaml
-  agents/openai.yaml
   references/
-
-mobile-automation/
-  SKILL.md
-  assets/mobile-capture-plan-template.yaml
-  agents/openai.yaml
-  references/
+    apple.md
+    google.md
 ```
+
+Never commit credential files, App Store Connect keys, Google service account JSON, keystores, provisioning profiles, certificates, APNs keys, OAuth secrets, reviewer passwords, or device tokens.
 
 ## License
 

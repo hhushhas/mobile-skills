@@ -18,3 +18,4 @@ service-account*.json
 node_modules/
 .env
 .env.*
+dist/

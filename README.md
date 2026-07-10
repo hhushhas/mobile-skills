@@ -4,6 +4,8 @@
 
 Agent Skills compatible workflows for tedious iOS and Android app work.
 
+Site: https://mobile-skills.msbilal.workers.dev
+
 This repo currently contains:
 
 - `mobile-submission`: prepare, review, and submit iOS/Android apps to App Store Connect and Google Play.
@@ -40,11 +42,16 @@ $mobile-automation
 
 ### ChatGPT / OpenAI Skills
 
-OpenAI skills can be uploaded from the Skills UI. Zip the specific skill folder you want to use, such as `mobile-submission/` or `mobile-automation/`, then upload it from ChatGPT's Skills page or your workspace skill editor.
+OpenAI skills can be uploaded from the Skills UI. Build the ZIPs and upload the one you want from ChatGPT's Skills page or your workspace skill editor:
+
+```bash
+./scripts/package.sh
+# → dist/mobile-submission.zip, dist/mobile-automation.zip
+```
 
 ### Claude Skills
 
-Claude supports custom skill ZIP uploads. Zip the specific skill folder and upload it from Claude's Skills customization page. Team/Enterprise sharing depends on your organization settings.
+Claude supports custom skill ZIP uploads. Build the ZIPs with `./scripts/package.sh` and upload from Claude's Skills customization page. Team/Enterprise sharing depends on your organization settings.
 
 ## Skills
 

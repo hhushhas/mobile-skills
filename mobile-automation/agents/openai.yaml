@@ -1,4 +1,0 @@
-interface:
-  display_name: "Mobile Automation"
-  short_description: "Automate mobile screenshots, auth, and push setup"
-  default_prompt: "Use $mobile-automation to prepare screenshots, auth, push notifications, and provider setup for this mobile app."

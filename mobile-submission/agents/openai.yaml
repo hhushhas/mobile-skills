@@ -1,4 +1,0 @@
-interface:
-  display_name: "Mobile Submission"
-  short_description: "Prepare and submit iOS/Android store releases"
-  default_prompt: "Use $mobile-submission to prepare this mobile app for App Store Connect and Google Play submission."

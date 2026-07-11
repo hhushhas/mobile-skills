@@ -3,28 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mobile Skills — Agent Skills for App Store &amp; Google Play submission</title>
-  <meta name="description" content="Two open-source Agent Skills that take your iOS and Android app from repo to Ready for Sale: policy readiness review, builds, uploads, store screenshots, and rejection recovery — from Claude Code, Codex, Cursor, or OpenCode.">
+  <title>Mobile Skills — Agent Skills for App Store &amp; Google Play</title>
+  <meta name="description" content="Agent Skills for iOS and Android store work, field-tested on real submissions: readiness review, builds, App Store Connect and Google Play submission, rejection recovery, and store-compliant screenshots — from Claude Code, Codex, Cursor, or OpenCode.">
   <link rel="canonical" href="https://mobile-skills.hasanshoaib.com/">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f6f6f4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101214" media="(prefers-color-scheme: dark)">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mobile-skills.hasanshoaib.com/">
   <meta property="og:site_name" content="Mobile Skills">
   <meta property="og:title" content="Mobile Skills — from repo to Ready for Sale">
-  <meta property="og:description" content="Agent Skills for App Store and Google Play submission: readiness review, builds, uploads, screenshots, and rejection recovery, run by your coding agent.">
+  <meta property="og:description" content="Agent Skills for iOS and Android store work, field-tested on real submissions — carrying only what agents get wrong without them.">
   <meta property="og:image" content="https://mobile-skills.hasanshoaib.com/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mobile Skills — from repo to Ready for Sale">
-  <meta name="twitter:description" content="Agent Skills for App Store and Google Play submission, run by your coding agent.">
+  <meta name="twitter:description" content="Agent Skills for iOS and Android store work, field-tested on real submissions.">
   <meta name="twitter:image" content="https://mobile-skills.hasanshoaib.com/assets/og-image.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 
   <script type="application/ld+json">
@@ -35,7 +37,7 @@
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "macOS, Linux",
     "url": "https://mobile-skills.hasanshoaib.com/",
-    "description": "Open-source Agent Skills that take iOS and Android apps from repo to published on the App Store and Google Play: readiness review, builds, uploads, screenshots, and rejection recovery.",
+    "description": "Agent Skills for iOS and Android store work, field-tested on real submissions: readiness review, builds, App Store Connect and Google Play submission, rejection recovery, and store-compliant listing media.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "license": "https://opensource.org/licenses/MIT",
     "author": { "@type": "Person", "name": "Hasan Shoaib", "url": "https://hasanshoaib.com" },
@@ -44,159 +46,75 @@
   </script>
 </head>
 <body>
-  <header class="wrap nav">
-    <a class="brand" href="/">
-      <img src="/assets/logo.svg" alt="" width="30" height="30">
-      Mobile Skills
-    </a>
-    <nav class="nav-links" aria-label="Site">
-      <a href="https://github.com/hhushhas/mobile-skills">GitHub</a>
-      <a href="https://skills.sh/hhushhas/mobile-skills">skills.sh</a>
-    </nav>
-  </header>
+  <div class="page">
+    <header>
+      <a class="brand" href="/">
+        <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+          <rect class="mark" x="5" y="11" width="48" height="48" rx="13"/>
+          <path class="cut" d="M29 48V31M29 29l-8.5 8.5M29 29l8.5 8.5" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <circle cx="51" cy="13" r="10" fill="#1fa45b"/>
+        </svg>
+        Mobile Skills
+      </a>
+      <nav aria-label="Site">
+        <a href="https://github.com/hhushhas/mobile-skills">GitHub</a>
+        <a href="https://skills.sh/hhushhas/mobile-skills">skills.sh</a>
+      </nav>
+    </header>
 
-  <main>
-    <section class="wrap hero">
-      <div class="status-track" aria-label="App Store review statuses">
-        <span class="status-step" data-step="1"><span class="dot"></span>Prepare for Submission</span>
-        <span class="rail"></span>
-        <span class="status-step" data-step="2"><span class="dot"></span>Waiting for Review</span>
-        <span class="rail"></span>
-        <span class="status-step" data-step="3"><span class="dot"></span>In Review</span>
-        <span class="rail"></span>
-        <span class="status-step" data-step="4"><span class="dot"></span>Ready for Sale</span>
-      </div>
+    <main>
+      <section class="hero">
+        <h1>From repo to <span class="sale-pill"><span class="dot"></span>Ready&nbsp;for&nbsp;Sale</span></h1>
 
-      <h1>Your agent takes it from repo to <span class="sale-pill"><span class="dot"></span>Ready&nbsp;for&nbsp;Sale</span></h1>
+        <p class="lede">Agent Skills for iOS and Android store work, <strong>field-tested on real submissions</strong> — new apps taken to production, rejections recovered, stale listings revived. The skills carry only what agents get wrong without them: fragile store-specific gotchas, exact commands where sequences silently fail, and the judgment calls reviewers actually enforce. Everything else is left to the model.</p>
 
-      <p class="lede">Mobile Skills are two open-source <strong>Agent Skills</strong> for App Store and Google Play work: policy readiness review, version bumps, builds, uploads, store-compliant screenshots, and rejection recovery — run from inside the coding agent you already use.</p>
-
-      <div class="install-row">
         <div class="cmd">
           <span class="prompt">$</span>
-          <span id="install-cmd">npx skills add hhushhas/mobile-skills</span>
+          <span>npx skills add hhushhas/mobile-skills</span>
           <button type="button" data-copy="npx skills add hhushhas/mobile-skills">copy</button>
         </div>
-        <a class="gh-link" href="https://github.com/hhushhas/mobile-skills">View source →</a>
-      </div>
 
-      <div class="works-with">
-        <span class="label">Works with</span>
-        <span class="agent-chip"><img src="/assets/claude.svg" alt="" width="18" height="18">Claude Code</span>
-        <span class="agent-chip"><img src="/assets/codex.svg" alt="" width="18" height="18">Codex</span>
-        <span class="agent-chip"><img src="/assets/cursor.svg" alt="" width="18" height="18">Cursor</span>
-        <span class="agent-chip"><img src="/assets/opencode.svg" alt="" width="18" height="18">OpenCode</span>
-      </div>
-    </section>
+        <div class="works-with">
+          <span><img src="/assets/claude.svg" alt="">Claude Code</span>
+          <span><img src="/assets/codex.svg" alt="">Codex</span>
+          <span><img src="/assets/cursor.svg" alt="">Cursor</span>
+          <span><img src="/assets/opencode.svg" alt="">OpenCode</span>
+        </div>
+      </section>
 
-    <section class="wrap" id="skills">
-      <p class="eyebrow">Two skills</p>
-      <h2>Everything between “it builds” and “it’s live”</h2>
-
-      <div class="skills-grid">
-        <article class="skill-card">
-          <h3>mobile-submission</h3>
-          <p class="tagline">Repo to review to release.</p>
-          <ul>
-            <li><strong>Judges your app like a reviewer</strong> — against the current App Review Guidelines and Play policy pages, on your app’s real risk surfaces, before you waste a review cycle.</li>
-            <li><strong>Ships the release</strong> — reads the diff, bumps versions everywhere (yes, <code>CFBundleVersion</code> and <code>versionCode</code>), writes release notes from what actually changed, builds, uploads, submits.</li>
-            <li><strong>Handles rejections precisely</strong> — fetches the cited guideline, checks community experience, and knows when a resolution-center reply beats rebuilding.</li>
-          </ul>
+      <section class="skills" aria-label="Skills">
+        <article class="skill">
+          <h2><span class="dot" aria-hidden="true"></span>mobile-submission</h2>
+          <p>Take an app from repo to the stores: readiness review against what reviewers actually reject, builds, App Store Connect and Google Play upload and submission, rejection recovery.</p>
         </article>
 
-        <article class="skill-card">
-          <h3>mobile-screenshots</h3>
-          <p class="tagline">Listing media with no physical device.</p>
-          <ul>
-            <li><strong>Captures at accepted sizes</strong> — picks a simulator or emulator that already matches a store dimension, so nothing gets resized or rejected.</li>
-            <li><strong>Validates before upload</strong> — Apple’s exact pixel pairs and Google’s aspect and alpha rules are machine-checkable, so they get checked locally.</li>
-            <li><strong>Knows why art isn’t showing</strong> — icon-in-binary rules, Play’s review delay, managed publishing — checked before anyone suspects a caching bug.</li>
-          </ul>
+        <article class="skill">
+          <h2><span class="dot" aria-hidden="true"></span>mobile-screenshots</h2>
+          <p>Store-compliant listing media — screenshots, icons, feature graphics, previews — from simulators and emulators, no physical device needed: capture natively at accepted sizes, clean the status bar, validate locally, upload.</p>
         </article>
-      </div>
-    </section>
 
-    <section class="wrap" id="how">
-      <p class="eyebrow">In practice</p>
-      <h2>One prompt, both stores</h2>
-
-      <div class="terminal">
-        <div class="terminal-bar" aria-hidden="true"><span></span><span></span><span></span><span class="title">agent session</span></div>
-        <pre><code><span class="u">$</span> <span class="c">claude "get 2.1 into review on both stores"</span>
-
-<span class="g">●</span> Using skill: <span class="c">mobile-submission</span>
-  Diff since v2.0.3 → feature release, bumping to <span class="c">2.1.0</span>
-  CFBundleVersion 214 → 215 · versionCode → 215
-  Release notes drafted from 12 commits
-  <span class="u">asc builds upload</span>       <span class="g">✓ processed</span>
-  <span class="u">gplay upload --track production</span>  <span class="g">✓</span>
-  <span class="u">asc submit</span>              <span class="y">● Waiting for Review</span>
-  <span class="u">gplay rollout --staged 10%</span>       <span class="y">● In review</span>
-
-  Left for you: approve the staged rollout when review clears.</code></pre>
-      </div>
-    </section>
-
-    <section class="wrap" id="approach">
-      <p class="eyebrow">How they’re built</p>
-      <h2>Lean skills, honest state</h2>
-
-      <div class="principles">
-        <div class="principle">
-          <h3>CLI-first</h3>
-          <p>Store work runs through <a href="https://github.com/rorkai/App-Store-Connect-CLI"><code>asc</code></a> and <a href="https://github.com/tamtom/play-console-cli"><code>gplay</code></a>. Browser automation is the fallback for web-only console forms, not the default.</p>
+        <div class="philosophy">
+          <p>CLI-first through <a href="https://github.com/rorkai/App-Store-Connect-CLI"><code>asc</code></a> and <a href="https://github.com/tamtom/play-console-cli"><code>gplay</code></a>, browser automation only for web-only console forms, and the human only for steps an account owner must personally do. Live state is the source of truth — the store over any local ledger.</p>
         </div>
-        <div class="principle">
-          <h3>The store is the source of truth</h3>
-          <p>No packets, ledgers, or state files. The skill fetches live status from App Store Connect and Play Console and trusts that over anything written down earlier.</p>
-        </div>
-        <div class="principle">
-          <h3>Humans do only owner steps</h3>
-          <p>You’re handed exactly the actions an account owner must personally take — agreements, first-time enrollments, final approvals — and nothing else.</p>
-        </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <section class="wrap" id="install">
-      <p class="eyebrow">Install</p>
-      <h2>In your agent in under a minute</h2>
-
-      <div class="install-block prose">
-        <p>With the skills CLI (any Agent Skills–compatible agent):</p>
-        <div class="cmd"><span class="prompt">$</span><span>npx skills add hhushhas/mobile-skills</span><button type="button" data-copy="npx skills add hhushhas/mobile-skills">copy</button></div>
-        <p>Or with the GitHub CLI:</p>
-        <div class="cmd"><span class="prompt">$</span><span>gh skill install hhushhas/mobile-skills mobile-submission</span><button type="button" data-copy="gh skill install hhushhas/mobile-skills mobile-submission">copy</button></div>
-        <p>Or copy either skill folder into your agent’s skills directory and invoke it — <code>mobile-submission</code> and <code>mobile-screenshots</code> are plain <code>SKILL.md</code> folders, MIT-licensed.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="wrap">
-    <span>MIT © <a href="https://hasanshoaib.com">Hasan Shoaib</a></span>
-    <nav aria-label="Footer">
-      <a href="https://github.com/hhushhas/mobile-skills">GitHub</a>
-      <a href="https://skills.sh/hhushhas/mobile-skills">skills.sh</a>
-      <a href="https://github.com/hhushhas/mobile-skills/blob/main/SECURITY.md">Security</a>
-    </nav>
-  </footer>
+    <footer>
+      <span>MIT © <a href="https://hasanshoaib.com">Hasan Shoaib</a></span>
+      <nav aria-label="Footer">
+        <a href="https://github.com/hhushhas/mobile-skills">GitHub</a>
+        <a href="https://skills.sh/hhushhas/mobile-skills">skills.sh</a>
+      </nav>
+    </footer>
+  </div>
 
   <script>
-    document.documentElement.classList.add("js");
-
     for (const btn of document.querySelectorAll("[data-copy]")) {
       btn.addEventListener("click", async () => {
         await navigator.clipboard.writeText(btn.dataset.copy);
         btn.textContent = "copied";
         setTimeout(() => { btn.textContent = "copy"; }, 1500);
       });
-    }
-
-    const steps = document.querySelectorAll(".status-step");
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      steps.forEach((s) => s.classList.add("lit"));
-    } else {
-      steps.forEach((s, i) => setTimeout(() => s.classList.add("lit"), 500 + i * 650));
     }
   </script>
 </body>

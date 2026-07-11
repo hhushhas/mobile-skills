@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://mobile-skills.msbilal.workers.dev/sitemap.xml

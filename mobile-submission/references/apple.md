@@ -1,6 +1,6 @@
 # Apple: App Store Connect via asc
 
-`asc` (rorkai) is the primary tool. Update it before serious submission work (`brew upgrade asc`), check auth with `asc auth doctor`, and use `--output json` for anything you'll parse. Auth is App Store Connect API key via env/profile: `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_PRIVATE_KEY_PATH` (or `ASC_PRIVATE_KEY`/`_B64`), `ASC_APP_ID`. The `.p8` key is downloadable exactly once from App Store Connect — make sure the human stores it in a secret manager at creation time. Team keys require Account Holder or Admin to create, under Users and Access > Integrations > App Store Connect API. When the CLI lacks coverage, `asc schema` plus `asc auth token` give you a direct authenticated API path; check current Apple API docs before hand-rolling calls. For deep metadata, localization, screenshot, or pricing work, the CLI author ships a companion skill pack (`rorkai/app-store-connect-cli-skills`) — install the relevant skill rather than re-deriving commands.
+`asc` (rorkai) is the primary tool. Update it before serious submission work (`brew upgrade asc`), check auth with `asc auth doctor`, and use `--output json` for anything you'll parse. Auth is App Store Connect API key via env/profile: `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_PRIVATE_KEY_PATH` (or `ASC_PRIVATE_KEY`/`_B64`), `ASC_APP_ID`. The `.p8` key is downloadable exactly once from App Store Connect — make sure the human stores it in a secret manager at creation time. Team keys require Account Holder or Admin to create, under Users and Access > Integrations > App Store Connect API. When the CLI lacks coverage, `asc schema` plus `asc auth token` give you a direct authenticated API path; check current Apple API docs before hand-rolling calls. `asc search` and `asc docs` answer command-discovery questions from the binary itself. For deep metadata, localization, screenshot, or pricing work, the CLI ships a companion skill pack (`rorkai/app-store-connect-cli-skills`) — register the skills you need in your skill manager (skillbox here) rather than installing them into an agent's global skills directory.
 
 ## Flow
 
@@ -19,18 +19,11 @@ Validate before publishing (`asc validate`; the old `asc submit preflight` is de
 
 ## Build
 
-Ask the signing question before building: local certificates/profiles vs cloud (EAS) — don't guess. After Expo prebuild or any native regeneration, re-check entitlements and the build number; prebuild can silently reset them. Verify the exported IPA's bundle ID, version, and build number match what you intend before uploading.
+Ask the signing question before building: local certificates/profiles vs cloud (EAS) — don't guess. After Expo prebuild or any native regeneration, re-check entitlements and the build number; prebuild can silently reset them. Verify the exported IPA's bundle ID, version, and build number match what you intend before uploading. The App Store icon ships inside the binary's asset catalog (1024×1024, opaque) — changing only the icon still means a new build and version through review.
 
 ## Console boundary
 
-Not available via API/CLI — browser automation or human:
-
-- App record creation (the Apps API explicitly disallows it; `asc web` or browser automation, else human)
-- App Privacy questionnaire — and it must be *published* before an App Review submission will go through
-- Agreements, tax, banking, identity — account owner only
-- API key creation and role grants — account owner only
-
-Most everything else — metadata, localizations, screenshots, review details, build attachment, review submission, TestFlight groups/testers — is API-covered.
+`asc capabilities` prints the live coverage map — every capability tagged cli-supported / partial / experimental-web / not-public-api, with commands and next actions; trust it over any written list. The durable facts: agreements, tax, banking, identity, API-key creation, and role grants are account-owner-only. App record creation and the App Privacy questionnaire are web-only — `asc web apps create` and `asc web privacy` exist but the CLI itself labels them experimental and discouraged, so prefer browser automation or the human. App Privacy must be *published* before an App Review submission will go through.
 
 ## Readiness judgment points
 

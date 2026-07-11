@@ -1,6 +1,6 @@
 # Google Play: via gplay
 
-`gplay` (tamtom) is the primary tool. Update before serious work (`brew upgrade tamtom/tap/gplay`), check with `gplay auth doctor --output json`. Auth is a Google Cloud service account, and setup has two halves that both must exist: the GCP side (service account created, Google Play Android Developer API enabled) *and* the Play Console side (the service account granted app access under Users and permissions) — API enablement alone silently gives you 403s. Store the JSON as a ref (`env:GOOGLE_APPLICATION_CREDENTIALS`), never inline. When `gplay` lacks coverage, fall back to the Android Publisher API v3 directly (scope `https://www.googleapis.com/auth/androidpublisher`); for Gradle-native projects, Gradle Play Publisher is a mature alternative. The CLI author ships a companion skill pack (`tamtom/gplay-cli-skills`) for metadata, screenshots, IAP, and rollout work — install rather than re-derive.
+`gplay` (tamtom) is the primary tool. Update before serious work (`brew upgrade tamtom/tap/gplay`), check with `gplay auth doctor --output json`. Auth is a Google Cloud service account, and setup has two halves that both must exist: the GCP side (service account created, Google Play Android Developer API enabled) *and* the Play Console side (the service account granted app access under Users and permissions) — API enablement alone silently gives you 403s. Store the JSON as a ref (`env:GOOGLE_APPLICATION_CREDENTIALS`), never inline. When `gplay` lacks coverage, fall back to the Android Publisher API v3 directly (scope `https://www.googleapis.com/auth/androidpublisher`); for Gradle-native projects, Gradle Play Publisher is a mature alternative. `gplay docs` answers command-discovery questions from the binary itself, and every write command honors a global `-dry-run` flag. The CLI ships a companion skill pack (`tamtom/gplay-cli-skills`) for metadata, screenshots, IAP, and rollout work — register the skills you need in your skill manager (skillbox here) rather than installing them into an agent's global skills directory.
 
 ## Tracks: resolve names before every call
 
@@ -17,10 +17,10 @@ gplay bundles upload --package <pkg> --edit <id> --file <aab>
 gplay tracks update --package <pkg> --edit <id> --track <track> --releases <json>
 gplay edits validate --package <pkg> --edit <id>
 gplay edits commit --package <pkg> --edit <id>       # the point of no return
-gplay status --package <pkg>                         # verify track state after
+gplay status --package <pkg>                         # verify track state after; --watch polls
 ```
 
-One edit per coherent release; validate before commit; commit is the store mutation. There is no App Store-style public review lifecycle to poll — after commit, poll *track state*, and expect propagation delay before testers see anything.
+One edit per coherent release; validate before commit; commit is the store mutation. There is no App Store-style public review lifecycle to poll — after commit, poll *track state* (`gplay status --watch`), and expect propagation delay before testers see anything. For getting a build onto a device fast with no review at all, `gplay internal-sharing` uploads to a shareable test link.
 
 ## Gotchas (all field-tested)
 
@@ -30,10 +30,12 @@ One edit per coherent release; validate before commit; commit is the store mutat
 - Special permissions (e.g. `FOREGROUND_SERVICE_MICROPHONE`) require a console declaration, often with a demo video showing the in-app justification — budget for recording one.
 - New personal developer accounts must run a closed test with a minimum tester count over a multi-week window before production access — check the current requirement on Play policy pages before promising a production date.
 - Notification-only email addresses go under Users and permissions > Email recipients; they don't need console access.
+- Any changed AAB needs a new `versionCode` — uploads reusing a code are rejected.
+- Listing graphics (icon, screenshots, feature graphic) don't display until the committed change is sent for review and approved; with managed publishing on, approved changes sit in "ready to publish" until manually published.
 
 ## Console boundary
 
-API-covered: edits, bundle upload, listings, images, release notes, tracks/rollouts, testers, and Data Safety labels (via `applications.dataSafety` with prepared JSON). Web-only — browser automation or human: app creation, content rating questionnaire, target audience, ads declaration, privacy policy URL field, sensitive-permission declarations. Owner-only: developer account creation, Play App Signing enrollment, service-account grants, payments/agreements.
+API-covered: edits, bundle upload, listings, images, release notes, tracks/rollouts, testers, and data safety declarations (`gplay data-safety`). Web-only — browser automation or human: app creation, content rating questionnaire, target audience, ads declaration, privacy policy URL field, sensitive-permission declarations; `gplay web` opens the right console page for these. Owner-only: developer account creation, Play App Signing enrollment, service-account grants, payments/agreements.
 
 ## Readiness judgment points
 

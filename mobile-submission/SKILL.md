@@ -12,7 +12,7 @@ Prefer the CLIs for most tasks and fall back to browser automation only when nec
 
 Fetch the state from the store (`asc status`, `gplay status`) and trust what it says over anything written down earlier.
 
-Store screenshots and media are their own workflow. For any screenshot, icon, feature graphic, preview, or rejected/stale listing-media work, load [`mobile-screenshots`](https://github.com/hhushhas/mobile-skills/tree/main/mobile-screenshots) through Skillbox (`skillbox fetch mobile-screenshots`) and follow it before uploading. Captures must come from the build being submitted; never substitute a mockup for a state the app cannot reach.
+Store screenshots and media are their own workflow. For any screenshot, branded composite, icon, feature graphic, preview, or rejected/stale listing-media work, load [`mobile-screenshots`](https://github.com/hhushhas/mobile-skills/tree/main/mobile-screenshots) through Skillbox (`skillbox fetch mobile-screenshots`) and follow it before uploading. Captures must come from the build being submitted; never substitute a mockup for a state the app cannot reach.
 
 ## Discovery
 

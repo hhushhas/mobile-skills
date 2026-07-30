@@ -10,7 +10,11 @@ Capture natively at an accepted size instead of resizing: pick a simulator or em
 
 The requirement floor is smaller than most write-ups claim: Apple needs one iPhone 6.9" set (1–10 shots) plus one 13" iPad set if the app runs on iPad — it scales those to every other size. Play needs at least two screenshots, a 512×512 icon, and a 1024×500 feature graphic before a listing can publish.
 
-What reviewers reject is mostly honesty, not pixels: screenshots that don't show the real app in use (no splash, login, or title cards), status-bar clutter (Play outright bans carrier names and notifications), promo text overwhelming the image, and frames or composites that misrepresent the app. Capture from the build you're submitting, not an older one — stale screenshots undercut even a metadata-only resubmission. Marketing composition — text, backgrounds, device bezels — is allowed on both stores over honest UI; compose with ImageMagick on top of validated captures (pass an explicit `-font`: the unset default errors on any annotation, even implicit labels), then re-validate dimensions.
+What reviewers reject is mostly honesty, not pixels: screenshots that don't show the real app in use (no splash, login, or title cards), status-bar clutter (Play outright bans carrier names and notifications), promo text overwhelming the image, and frames or composites that misrepresent the app. Capture from the build you're submitting, not an older one — stale screenshots undercut even a metadata-only resubmission.
+
+## Branded sets
+
+Branded composition — short truthful headlines, backgrounds, motifs, and device framing — is allowed on both stores. Start with one concept; use image generation only for the surrounding art direction and keep the real capture locked, then vary color and composition across the set while retaining one recognizable visual system. Treat generated product UI as a placeholder: replace it programmatically with the untouched validated capture, inspect the full contact sheet, and re-validate every final asset. ImageMagick works well for composition; pass an explicit `-font`, because the unset default errors on any annotation, even implicit labels.
 
 ## Uploaded but not showing
 

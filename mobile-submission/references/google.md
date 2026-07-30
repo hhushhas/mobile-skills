@@ -17,10 +17,12 @@ gplay bundles upload --package <pkg> --edit <id> --file <aab>
 gplay tracks update --package <pkg> --edit <id> --track <track> --releases <json>
 gplay edits validate --package <pkg> --edit <id>
 gplay edits commit --package <pkg> --edit <id>       # the point of no return
-gplay status --package <pkg>                         # verify API track state after; --watch polls
+gplay status --package <pkg>                         # JSON by default; --pretty formats; --watch polls
 ```
 
-One edit per coherent release; validate before commit; commit is the API store mutation. After commit, poll *track state* (`gplay status --watch`), but do not treat `status: completed` as proof that the release is public. If managed publishing is on, inspect Play Console's Publishing overview: the release can move through Changes in review and then Changes ready to publish even while the API reports the production track as completed. Complete the separate Publish action after approval, then verify that Last published changed and Changes ready to publish is empty before reporting the production release as published. Expect propagation delay after that proof. For getting a build onto a device fast with no review at all, `gplay internal-sharing` uploads to a shareable test link.
+One edit per coherent release; validate before commit; commit is the API store mutation. After commit, poll *track state* (`gplay status --watch`); do not add `--output json`, because `status` already emits JSON and only supports `--pretty` as a display alternative. The edit ID returned by `status` belongs to its transient read lifecycle and is deleted before the command returns, so never reuse it for listings, images, bundles, or other edit-scoped reads — create a fresh edit instead.
+
+Track state still does not prove that the release is public. If managed publishing is on, inspect Play Console's Publishing overview: the release can move through Changes in review and then Changes ready to publish even while the API reports the production track as completed. Complete the separate Publish action after approval, then verify that Last published changed and Changes ready to publish is empty before reporting the production release as published. Expect propagation delay after that proof. For getting a build onto a device fast with no review at all, `gplay internal-sharing` uploads to a shareable test link.
 
 ## Gotchas (all field-tested)
 
@@ -37,7 +39,7 @@ One edit per coherent release; validate before commit; commit is the API store m
 
 ## Console boundary
 
-API-covered: edits, bundle upload, listings, images, release notes, tracks/rollouts, testers, and data safety declarations (`gplay data-safety`). Web-only — browser automation or human: app creation, content rating questionnaire, target audience, ads declaration, privacy policy URL field, sensitive-permission declarations; `gplay web` opens the right console page for these. Owner-only: developer account creation, Play App Signing enrollment, service-account grants, payments/agreements.
+API-covered: edits, bundle upload, listings, images, release notes, tracks/rollouts, testers, and data safety declarations (`gplay data-safety`). Web-only — use an authorized browser session for app creation, content rating, target audience, ads, the privacy-policy URL field, and sensitive-permission declarations; `gplay web` opens the right console page. These are normal first-release tasks, not blockers. Owner-only: developer account creation, Play App Signing enrollment, service-account grants, payments/agreements.
 
 ## Readiness judgment points
 

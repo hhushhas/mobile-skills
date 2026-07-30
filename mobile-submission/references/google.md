@@ -17,10 +17,10 @@ gplay bundles upload --package <pkg> --edit <id> --file <aab>
 gplay tracks update --package <pkg> --edit <id> --track <track> --releases <json>
 gplay edits validate --package <pkg> --edit <id>
 gplay edits commit --package <pkg> --edit <id>       # the point of no return
-gplay status --package <pkg>                         # verify track state after; --watch polls
+gplay status --package <pkg>                         # verify API track state after; --watch polls
 ```
 
-One edit per coherent release; validate before commit; commit is the store mutation. There is no App Store-style public review lifecycle to poll — after commit, poll *track state* (`gplay status --watch`), and expect propagation delay before testers see anything. For getting a build onto a device fast with no review at all, `gplay internal-sharing` uploads to a shareable test link.
+One edit per coherent release; validate before commit; commit is the API store mutation. After commit, poll *track state* (`gplay status --watch`), but do not treat `status: completed` as proof that the release is public. If managed publishing is on, inspect Play Console's Publishing overview: the release can move through Changes in review and then Changes ready to publish even while the API reports the production track as completed. Complete the separate Publish action after approval, then verify that Last published changed and Changes ready to publish is empty before reporting the production release as published. Expect propagation delay after that proof. For getting a build onto a device fast with no review at all, `gplay internal-sharing` uploads to a shareable test link.
 
 ## Gotchas (all field-tested)
 
@@ -32,6 +32,7 @@ One edit per coherent release; validate before commit; commit is the store mutat
 - New personal developer accounts must run a closed test with a minimum tester count over a multi-week window before production access — check the current requirement on Play policy pages before promising a production date.
 - Notification-only email addresses go under Users and permissions > Email recipients; they don't need console access.
 - Any changed AAB needs a new `versionCode` — uploads reusing a code are rejected.
+- Managed publishing creates a second production gate that the Publisher API does not expose reliably: `gplay status` can report a completed production release while Play Console still requires review or a manual Publish action. Keep the release status pending until Publishing overview shows a new Last published date and an empty ready-to-publish queue.
 - Listing graphics (icon, screenshots, feature graphic) don't display until the committed change is sent for review and approved; with managed publishing on, approved changes sit in "ready to publish" until manually published.
 
 ## Console boundary

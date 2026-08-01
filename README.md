@@ -6,6 +6,7 @@ Agent Skills for iOS and Android store work, field-tested on real submissions �
 
 - **`mobile-submission`** — take an app from repo to the stores: readiness review against what reviewers actually reject, builds, App Store Connect and Google Play upload and submission, rejection recovery.
 - **`mobile-screenshots`** — store-compliant listing media (screenshots, icons, feature graphics, previews) from simulators and emulators, no physical device needed: capture natively at accepted sizes, clean the status bar, validate locally, upload.
+- **`mobile-widgets`** — native iOS WidgetKit and Android App Widget experiences: focused product surfaces, responsive layouts, shared state, safe actions, timelines, previews, and device verification.
 
 The working philosophy: CLI-first through [`asc`](https://github.com/rorkai/App-Store-Connect-CLI) (App Store Connect) and [`gplay`](https://github.com/tamtom/play-console-cli) (Google Play), browser automation for web-only console forms, and the human only for steps an account owner must personally do. Live state is the source of truth — the store over any local ledger, each subcommand's `--help` over any written table, no packets or state files. For deeper metadata, pricing, and multi-locale pipelines, the CLIs ship companion packs: [app-store-connect-cli-skills](https://github.com/rorkai/app-store-connect-cli-skills), [gplay-cli-skills](https://github.com/tamtom/gplay-cli-skills).
 
@@ -14,6 +15,7 @@ The working philosophy: CLI-first through [`asc`](https://github.com/rorkai/App-
 ```bash
 gh skill install hhushhas/mobile-skills mobile-submission
 gh skill install hhushhas/mobile-skills mobile-screenshots
+gh skill install hhushhas/mobile-skills mobile-widgets
 ```
 
 Or once indexed by your skill manager:

@@ -14,15 +14,15 @@ Fetch the state from the store (`asc status`, `gplay status`) and trust what it 
 
 Store screenshots and media are their own workflow. For any screenshot, branded composite, icon, feature graphic, preview, or rejected/stale listing-media work, load [`mobile-screenshots`](https://github.com/hhushhas/mobile-skills/tree/main/mobile-screenshots) through Skillbox (`skillbox fetch mobile-screenshots`) and follow it before uploading. Captures must come from the build being submitted; never substitute a mockup for a state the app cannot reach.
 
-## Listing
-
-Store listing copy is a product-positioning and branding workflow, not clerical metadata entry. For any new listing, metadata refresh, app-name decision, description rewrite, or store-branding work, load [`references/store-listing.md`](references/store-listing.md) and create or update the app's `docs/store-listing.md`. Ground the promise in the submitted build, lead with a concrete user pain, use `App Name — outcome` titles with an em dash rather than a colon, and keep platform copy, reviewer instructions, and deliberately avoided claims aligned with what the app actually does. Validate field limits and live metadata through the store before upload; the local draft is a source for copy, not proof that a listing is published.
-
 ## Discovery
 
 Starting points: bundle ID and package name, framework and build system, permissions and their purpose strings, auth and account deletion, payments, UGC/AI surfaces, privacy/support/terms URLs, existing store assets; let what you find lead the rest. Then judge the app the way a reviewer will, against the current official policy pages (App Review Guidelines, Play policy center) for the app's actual risk surfaces — payments, kids, health, UGC, AI, tracking — not a generic checklist. Report what would likely get it rejected and fix with the user's approval before spending time on store plumbing. Then work through records, listing, build, upload, testing, and submission per the store references.
 
 For a first release, missing store records, declarations, listing fields, review assets, and testing-track setup are expected prerequisites, not blockers. Complete them through the authorized CLI or browser. “Web-only” identifies the execution route; it is not a blocker when an authorized browser session exists. Reserve a human blocker for missing credentials or legal authority, a product decision, a human-only attestation, or an unavailable service.
+
+## Listing
+
+Follow [`references/store-listing.md`](references/store-listing.md) for positioning, titles, descriptions, and claims.
 
 ## Update
 
